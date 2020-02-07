@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context ="http://www.springframework.org/schema/context"
+       xmlns:aop ="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <bean id = "userService" class="service.UserServiceImp"></bean>
+        <bean id = "before_log" class="log.Before_log"></bean>
+        <bean id="after_log" class="log.After_log"></bean>
+<!--    第一种使用API接口实现AOP-->
+<!--&lt;!&ndash;    配置aop：需要导入aop约束&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--&lt;!&ndash;        切入点：experssion 表达式：execution（需要执行的位置 *修饰词 ）&ndash;&gt;-->
+<!--&lt;!&ndash;        execution表达式总结：&ndash;&gt;-->
+<!--&lt;!&ndash;        https://blog.csdn.net/ABCD898989/article/details/50809321&ndash;&gt;-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* service.UserServiceImp.*(..))"/>-->
+<!--&lt;!&ndash;                                                     返回值类型  *代表的是任意返回值类型 需要插入的类名  这个类下的所有方法&ndash;&gt;-->
+<!--        &lt;!&ndash; 执行环绕增加&ndash;&gt;-->
+<!--        &lt;!&ndash;将这个类切入到切入点&ndash;&gt;-->
+<!--        <aop:advisor advice-ref="before_log" pointcut-ref="pointcut"></aop:advisor>-->
+<!--        <aop:advisor advice-ref="after_log" pointcut-ref="pointcut"></aop:advisor>-->
+<!--    </aop:config>-->
+
+<!--&lt;!&ndash;    法2：自定义类&ndash;&gt;-->
+<!--        <bean id="diy" class="DIY.DiyPointcut"/>-->
+<!--        <aop:config>-->
+<!--&lt;!&ndash;            自定义切面  ref要引用的类&ndash;&gt;-->
+<!--            <aop:aspect ref = "diy">-->
+<!--&lt;!&ndash;                切入点&ndash;&gt;-->
+<!--                <aop:pointcut id="point" expression="execution(* service.UserServiceImp.*(..))"/>-->
+<!--&lt;!&ndash;                通知&ndash;&gt;-->
+<!--                <aop:before method="before" pointcut-ref="point"/>-->
+<!--                <aop:after method="after"   pointcut-ref="point"/>-->
+
+<!--            </aop:aspect>-->
+<!--        </aop:config>-->
+
+<!--    法3：注解声明-->
+    <bean id = "zhujie" class="DIY.zhujie_AOP"/>
+<!--    开启注解支持  JDK（默认 proxy-target-class="false"） cglib（proxy-target-class="true"）-->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+</beans>

@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id = "User" class="User">
+    <bean id = "com.cooper.pojo.User" class="com.cooper.pojo.User">
         <constructor-arg name="name" value="薛进"/>
     </bean>
 
