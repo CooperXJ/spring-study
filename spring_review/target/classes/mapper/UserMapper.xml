@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--绑定接口  以及需要对数据库操作的指令-->
+<mapper namespace = "mapper.UserMapper">
+    <select id="selectUser" resultType="User">
+        select * from test.WebUser;
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into test.WebUser (id,name,password,email) values (#{id},#{name},#{password},#{email});
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from test.WebUser where id = #{id};
+    </delete>
+</mapper>
